@@ -16,6 +16,7 @@ class LaravelGoogleSpreadSheet
     protected $result;
 
     protected $values;
+
     private $config;
 
     public function __construct($config)
