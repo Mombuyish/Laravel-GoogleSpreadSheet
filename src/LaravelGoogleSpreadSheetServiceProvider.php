@@ -21,7 +21,7 @@ class LaravelGoogleSpreadSheetServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('laravel-googlespreadsheet.php'),
+                __DIR__.'/../config/config.php' => config_path('google-spreadsheet.php'),
             ], 'config');
 
             // Publishing the views.
@@ -50,7 +50,7 @@ class LaravelGoogleSpreadSheetServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-googlespreadsheet');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'google-spreadsheet');
 
         // Register the main class to use with the facade
         $this->app->singleton('laravel-googlespreadsheet', function ($app) {

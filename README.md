@@ -1,11 +1,11 @@
-# Very short description of the package
+# Laravel Google SpreadSheet
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/yish/laravel-googlespreadsheet.svg?style=flat-square)](https://packagist.org/packages/yish/laravel-googlespreadsheet)
 [![Build Status](https://img.shields.io/travis/yish/laravel-googlespreadsheet/master.svg?style=flat-square)](https://travis-ci.org/yish/laravel-googlespreadsheet)
 [![Quality Score](https://img.shields.io/scrutinizer/g/yish/laravel-googlespreadsheet.svg?style=flat-square)](https://scrutinizer-ci.com/g/yish/laravel-googlespreadsheet)
 [![Total Downloads](https://img.shields.io/packagist/dt/yish/laravel-googlespreadsheet.svg?style=flat-square)](https://packagist.org/packages/yish/laravel-googlespreadsheet)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+Google spreadsheet transforms to json and storing to file with laravel.
 
 ## Installation
 
@@ -41,8 +41,7 @@ If you discover any security related issues, please email mombuartworks@gmail.co
 
 ## Credits
 
-- [Yish](https://github.com/yish)
-- [All Contributors](../../contributors)
+- [Yish](https://github.com/mombuyish)
 
 ## License
 

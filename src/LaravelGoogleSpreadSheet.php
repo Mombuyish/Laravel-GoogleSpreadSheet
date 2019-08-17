@@ -9,15 +9,13 @@ use PulkitJalan\Google\Facades\Google;
 
 class LaravelGoogleSpreadSheet
 {
-    public $data;
-
-    protected $endpoint;
+    protected $data;
 
     protected $result;
 
     protected $values;
 
-    private $config;
+    protected $config;
 
     public function __construct($config)
     {
@@ -25,28 +23,61 @@ class LaravelGoogleSpreadSheet
     }
 
     /**
-     * @param $sheet_id
-     * @param $range
-     * @param $unset
      * @param null $scope
-     * @return $this
+     * @return mixed
      */
-    public function toJson($sheet_id, $range, $unset = [], $scope = null)
+    public function initClient($scope = null)
     {
         $client = Google::getClient();
         $client->useApplicationDefaultCredentials();
 
-        $client->setScopes(empty($scope) ? Google_Service_Sheets::SPREADSHEETS_READONLY : $scope);
+        $scope = empty($scope) ? Google_Service_Sheets::SPREADSHEETS_READONLY : $scope;
+
+        $client->setScopes($scope);
         $client->setAccessType($this->config['access_type']);
 
+        return $client;
+    }
+
+    /**
+     * @param $client
+     * @param $spreadsheetId
+     * @param $range
+     * @return mixed
+     */
+    public function callServiceSheet($client, $spreadsheetId, $range)
+    {
         $service = new Google_Service_Sheets($client);
-        $spreadsheetId = $sheet_id;
-        $response = $service->spreadsheets_values->get($spreadsheetId, $range);
-        $this->values = $response->getValues();
+        return $service->spreadsheets_values->get($spreadsheetId, $range);
+    }
 
-        $this->result = $this->map($this->values, $unset);
-
+    /**
+     * @param $sheet
+     * @param $title
+     * @param $unset
+     */
+    public function setProperties($sheet, $title, $unset)
+    {
+        $this->values = $sheet->getValues();
+        $this->result = $this->map($this->values, $title, $unset);
         $this->data = "[" . implode(',', $this->result) . "]";
+    }
+
+    /**
+     * @param $sheet_id
+     * @param $range
+     * @param int $title
+     * @param array $unset
+     * @param null $scope
+     * @return $this
+     */
+    public function json($sheet_id, $range, $title = 0, $unset = [], $scope = null)
+    {
+        $client = $this->initClient($scope);
+
+        $sheet = $this->callServiceSheet($client, $sheet_id, $range);
+
+        $this->setProperties($sheet, $title, $unset);
 
         return $this;
     }
@@ -66,18 +97,12 @@ class LaravelGoogleSpreadSheet
         return $this->result;
     }
 
-    public function storeTo($path, $disk = 'public')
+    public function storeAs($path, $disk = 'public')
     {
         return Storage::disk($disk)->put($path, $this->data);
     }
 
-    /**
-     * @param $sheet_id
-     * @param int $sheet
-     * @param string $format
-     * @return mixed
-     */
-    public function toFeed($sheet_id, $sheet = 1, $format = 'json')
+    public function feed($sheet_id, $sheet = 1, $format = 'json')
     {
         $end_point = "https://spreadsheets.google.com/feeds/cells/{$sheet_id}/{$sheet}/public/values?alt={$format}";
 
@@ -90,14 +115,15 @@ class LaravelGoogleSpreadSheet
 
     /**
      * @param $values
+     * @param int $title
      * @param array $unset
      * @return array
      */
-    protected function map($values, $unset = []): array
+    public function map($values, $title, $unset): array
     {
         // Fetching column title and unset.
-        $columns = $values[0];
-        unset($values[0]);
+        $columns = $values[$title];
+        unset($values[$title]);
 
         if (! empty($unset) && is_array($unset)) {
             foreach ($unset as $u) {
