@@ -4,8 +4,6 @@ namespace Yish\LaravelGoogleSpreadSheet\Tests;
 
 use Yish\LaravelGoogleSpreadSheet\LaravelGoogleSpreadSheet;
 use Orchestra\Testbench\TestCase as LaravelTestCase;
-use Yish\LaravelGoogleSpreadSheet\LaravelGoogleSpreadSheetFacade;
-use Yish\LaravelGoogleSpreadSheet\LaravelGoogleSpreadSheetServiceProvider;
 
 class SpreadSheetTest extends LaravelTestCase
 {
@@ -66,6 +64,6 @@ class SpreadSheetTest extends LaravelTestCase
 
         $instance = new LaravelGoogleSpreadSheet($this->app['config']->get('google-spreadsheet.access_type'));
 
-        $this->assertEquals($expected, $instance->map($raw));
+        $this->assertEquals($expected, $instance->map($raw, 0, [0]));
     }
 }

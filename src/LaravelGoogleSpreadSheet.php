@@ -56,7 +56,7 @@ class LaravelGoogleSpreadSheet
      * @param $title
      * @param $unset
      */
-    public function setProperties($sheet, $title, $unset)
+    protected function setProperties($sheet, $title, $unset)
     {
         $this->values = $sheet->getValues();
         $this->result = $this->map($this->values, $title, $unset);
@@ -119,7 +119,7 @@ class LaravelGoogleSpreadSheet
      * @param array $unset
      * @return array
      */
-    public function map($values, $title, $unset): array
+    public function map($values, $title, array $unset): array
     {
         // Fetching column title and unset.
         $columns = $values[$title];
