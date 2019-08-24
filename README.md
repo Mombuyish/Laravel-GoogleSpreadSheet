@@ -14,6 +14,24 @@ You can install the package via composer:
 composer require yish/laravel-googlespreadsheet
 ```
 
+If you need to set access type, you can publish config.
+
+This package depends on `pulkitjalan/google-apiclient`, so you need to publish `pulkitjalan/google-apiclient` config and setup.
+
+``` php
+    'service' =>  [
+        'enabled' => true,
+        'file' => 'your-service-account-json-file-path',
+    ],
+```
+
+You need to check your service account and configs are all done.
+1. google console
+2. service account
+3. download credential.json
+4. enabled sheet api
+5. paste service account to sheet account permission
+
 ## Usage
 
 ``` php
