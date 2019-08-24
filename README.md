@@ -2,7 +2,6 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/yish/laravel-googlespreadsheet.svg?style=flat-square)](https://packagist.org/packages/yish/laravel-googlespreadsheet)
 [![Build Status](https://img.shields.io/travis/yish/laravel-googlespreadsheet/master.svg?style=flat-square)](https://travis-ci.org/yish/laravel-googlespreadsheet)
-[![Quality Score](https://img.shields.io/scrutinizer/g/yish/laravel-googlespreadsheet.svg?style=flat-square)](https://scrutinizer-ci.com/g/yish/laravel-googlespreadsheet)
 [![Total Downloads](https://img.shields.io/packagist/dt/yish/laravel-googlespreadsheet.svg?style=flat-square)](https://packagist.org/packages/yish/laravel-googlespreadsheet)
 
 Google spreadsheet transforms to json and storing to file with laravel.
@@ -18,13 +17,17 @@ composer require yish/laravel-googlespreadsheet
 ## Usage
 
 ``` php
-// Usage description here
-```
-
-### Testing
-
-``` bash
-composer test
+// $sheet_id = your google spreadsheet id.
+// $range = you need column range, like 'Class Data!A2:E', if you use chinese, using double quote. "'首頁'!A2:E".
+// $title = you want to set which one be a title key.
+// $unset = you want to unset which columns. 
+// $scope = Google_Service_Sheets::SPREADSHEETS_READONLY.
+GoogleSpreadSheet::json($sheet_id, $range, $title = 0, $unset = [], $scope = null)
+GoogleSpreadSheet::json($sheet_id, 'index!A2:E', 0, [1, 2]) // get the sheet and set 0 column to be title key, unset column 1 and column 2.
+// You can chain the storeAs.
+GoogleSpreadSheet::json($sheet_id, 'index!A2:E', 0, [1, 2])->storeAs($path, $disk = 'public')
+// Or you can use feed.
+GoogleSpreadSheet::feed($sheet_id, $sheet = 1, $format = 'json')
 ```
 
 ### Changelog
@@ -46,7 +49,3 @@ If you discover any security related issues, please email mombuartworks@gmail.co
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
