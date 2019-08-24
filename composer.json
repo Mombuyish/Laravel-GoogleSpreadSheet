@@ -7,7 +7,7 @@
         "google",
         "spreadsheet"
     ],
-    "homepage": "https://github.com/yish/laravel-GoogleSpreadSheet",
+    "homepage": "https://github.com/mombuyish/laravel-GoogleSpreadSheet",
     "license": "MIT",
     "type": "library",
     "authors": [
