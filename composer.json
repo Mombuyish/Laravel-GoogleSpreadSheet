@@ -1,5 +1,5 @@
 {
-    "name": "yish/Laravel-GoogleSpreadSheet",
+    "name": "yish/laravel-googlespreadsheet",
     "description": "Google spreadsheet transforms to json and storing to file with laravel.",
     "keywords": [
         "yish",
