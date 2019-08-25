@@ -1,7 +1,7 @@
 # Laravel Google SpreadSheet
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/yish/laravel-googlespreadsheet.svg?style=flat-square)](https://packagist.org/packages/yish/laravel-googlespreadsheet)
-[![Build Status](https://img.shields.io/travis/yish/laravel-googlespreadsheet/master.svg?style=flat-square)](https://travis-ci.org/Mombuyish/laravel-googlespreadsheet)
+[![Build Status](https://img.shields.io/travis/Mombuyish/laravel-googlespreadsheet/master.svg?style=flat-square)](https://travis-ci.org/Mombuyish/laravel-googlespreadsheet)
 [![Total Downloads](https://img.shields.io/packagist/dt/yish/laravel-googlespreadsheet.svg?style=flat-square)](https://packagist.org/packages/yish/laravel-googlespreadsheet)
 
 Google spreadsheet transforms to json and storing to file with laravel.
